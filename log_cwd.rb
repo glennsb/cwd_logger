@@ -29,9 +29,7 @@ end
 
 def change_to_dir(dirs,target=nil)
   if target && target.to_i < dirs.count
-    require 'shellwords'
     dir = dirs.skip(target.to_i).next_document["path"]
-    # dir = Shellwords.shellescape(dir)
     puts "#{dir}"
   else
     puts "usage: #{File.basename($0)} index"
