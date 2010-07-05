@@ -1,0 +1,12 @@
+# cwd_logger
+
+## What
+A simple test script to log working directories into mongodb
+
+## How
+
+* Setup a mongodb database
+
+* Call log_cwd.rb when you change directory_
+
+* Set up shell functions for calling cwd_frequency.rb or cwd_recently.rb
