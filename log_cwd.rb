@@ -18,12 +18,19 @@ def log_current
 end
 
 def frequency(target = nil)
-  dirs = @collection.find({},{:limit => 10, :sort =>[:count,Mongo::DESCENDING]})
+  dirs = @collection.find({},{:limit => 15, :sort =>[:count,Mongo::DESCENDING]})
   change_to_dir(dirs,target)
 end
 
+def dampen_frequency()
+  @collection.find().each do |doc|
+    doc['count'] = doc['count']/2
+    @collection.update({:_id => doc['_id']},doc)
+  end
+end
+
 def recently(target)
-  dirs = @collection.find({},{:limit => 10, :sort =>[:last_access,Mongo::DESCENDING]})  
+  dirs = @collection.find({},{:limit => 15, :sort =>[:last_access,Mongo::DESCENDING]})  
   change_to_dir(dirs,target)
 end
 
@@ -46,6 +53,8 @@ case $0
     frequency(ARGV.shift)
   when /cwd_recently.rb/
     recently(ARGV.shift)
+  when /cwd_dampen_frequency.rb/
+    dampen_frequency()
   else
     log_current()
 end
