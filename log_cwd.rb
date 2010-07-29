@@ -10,7 +10,7 @@ require 'mongo'
 @collection = Mongo::Connection.new("localhost").db("glennsb")['logged_dirs']
 
 def log_current
-  path = Dir.getwd
+  path = ENV["PWD"]
   unless path == ENV['HOME'] 
     doc = {'$set' => {:path => path, :last_access => Time.now}, '$inc' => {:count => 1}}
     @collection.update({:path => path}, doc, {:upsert => true})
