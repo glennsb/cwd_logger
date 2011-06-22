@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby1.9
+#!/Users/glennsb/.rvm/rubies/default/bin/ruby
 
 # Stuart Glenn 2010-07-04
 # Loggin directory frequency & access time
